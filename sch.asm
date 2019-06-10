@@ -71,47 +71,47 @@
 		  NILL R2,X'80'
           BZ DIS
 		  
- EN:      WTO 'ENABLED'
+ EN      WTO 'ENABLED'
           B CONT
- DIS:     WTO 'DISABLED'
- CONT:	  DS  0H 	 
+ DIS     WTO 'DISABLED'
+ CONT	  DS  0H 	 
                        
           XC UNPCKD,UNPCKD 
                       
           WTO 'LPM:'               
-          UNPK UNPCKD(10),SCHIB+8(5)           
-          TR   UNPCKD+1(4),UPTABLE              
-          MVC  LPMV+2(8),UNPCKD+1               
+          UNPK UNPCKD(6),SCHIB+8(3)           
+          TR   UNPCKD+1(2),UPTABLE              
+          MVC  LPMV+2(4),UNPCKD+1               
           WTO  TEXT=LPMV 
 		  
 		  XC UNPCKD,UNPCKD 
                       
           WTO 'PNOM:'               
-          UNPK UNPCKD(10),SCHIB+9(5)           
-          TR   UNPCKD+1(4),UPTABLE              
-          MVC  PNOMV+2(8),UNPCKD+1               
+          UNPK UNPCKD(6),SCHIB+9(3)           
+          TR   UNPCKD+1(2),UPTABLE              
+          MVC  PNOMV+2(4),UNPCKD+1               
           WTO  TEXT=PNOMV 
 		  
 		  XC UNPCKD,UNPCKD 
                       
           WTO 'LPUM:'               
-          UNPK UNPCKD(10),SCHIB+10(5)           
-          TR   UNPCKD+1(4),UPTABLE              
-          MVC  LPUMV+2(8),UNPCKD+1               
+          UNPK UNPCKD(6),SCHIB+10(3)           
+          TR   UNPCKD+1(2),UPTABLE              
+          MVC  LPUMV+2(4),UNPCKD+1               
           WTO  TEXT=LPUMV 
 		  
 		  XC UNPCKD,UNPCKD 
                       
           WTO 'PIM:'               
-          UNPK UNPCKD(10),SCHIB+11(5)           
-          TR   UNPCKD+1(4),UPTABLE              
-          MVC  PIMV+2(8),UNPCKD+1               
+          UNPK UNPCKD(6),SCHIB+11(3)           
+          TR   UNPCKD+1(2),UPTABLE              
+          MVC  PIMV+2(4),UNPCKD+1               
           WTO  TEXT=PIMV
 		  
 		  XC UNPCKD,UNPCKD 
                       
           WTO 'POM:'               
-          UNPK UNPCKD(10),SCHIB+14(5)           
+          UNPK UNPCKD(6),SCHIB+14(3)           
           TR   UNPCKD+1(4),UPTABLE              
           MVC  POMV+2(8),UNPCKD+1               
           WTO  TEXT=POMV 
@@ -119,9 +119,9 @@
 		  XC UNPCKD,UNPCKD 
                       
           WTO 'PAM:'               
-          UNPK UNPCKD(10),SCHIB+15(5)           
-          TR   UNPCKD+1(4),UPTABLE              
-          MVC  PAMV+2(8),UNPCKD+1               
+          UNPK UNPCKD(6),SCHIB+15(3)           
+          TR   UNPCKD+1(2),UPTABLE              
+          MVC  PAMV+2(4),UNPCKD+1               
           WTO  TEXT=PAMV 		  
 
  * LOADING LPM TO R15                       
@@ -135,6 +135,7 @@
  FINISH   L  R13,SAVEAREA+4                    
           LM R14,R12,12(R13)                   
           BR R14 
+		  LTORG
  * STORAGES AND CONSTANTS DEFINITION                              
  SAVEAREA DS 18F                               
  SCHN     DC X'0001FFFF'                       
@@ -143,40 +144,40 @@
  SCHIB    DS 12F                               
  PACKED   DC XL2'0'                            
  UNPCKD   DC CL16'0'                           
- PTABLE   DC XL255'0'                          
+ PTABLE   DS CL255                          
           ORG PTABLE+C'0'                      
-          DC  X'00'                            
+          DC  X'0'                            
           ORG PTABLE+C'1'                      
-          DC  X'01'                            
+          DC  X'1'                            
           ORG PTABLE+C'2'                      
-          DC  X'02'                            
+          DC  X'2'                            
           ORG PTABLE+C'3'                      
-          DC  X'03'                            
+          DC  X'3'                            
           ORG PTABLE+C'4'                    
-          DC  X'04'                          
+          DC  X'4'                          
           ORG PTABLE+C'5'                    
-          DC  X'05'                          
+          DC  X'5'                          
           ORG PTABLE+C'6'                    
-          DC  X'06'                          
+          DC  X'6'                          
           ORG PTABLE+C'7'                    
-          DC  X'07'                          
+          DC  X'7'                          
           ORG PTABLE+C'8'                    
-          DC  X'08'                          
+          DC  X'8'                          
           ORG PTABLE+C'9'                    
-          DC  X'09'                          
+          DC  X'9'                          
           ORG PTABLE+C'A'                    
-          DC  X'0A'                          
+          DC  X'A'                          
           ORG PTABLE+C'B'                    
-          DC  X'0B'                          
+          DC  X'B'                          
           ORG PTABLE+C'C'                    
-          DC  X'0C'                          
+          DC  X'C'                          
           ORG PTABLE+C'D'                    
-          DC  X'0D'                          
+          DC  X'D'                          
           ORG PTABLE+C'E'                    
-          DC  X'0E'                          
+          DC  X'E'                          
           ORG PTABLE+C'F'                    
-          DC  X'0F'                          
- UPTABLE  DC XL255'0'                        
+          DC  X'F'                          
+ UPTABLE  DS CL255                        
          ORG UPTABLE+X'F0'                  
          DC  C'0'                           
          ORG UPTABLE+X'F1'                      
@@ -217,18 +218,18 @@
           DC CL4'0'                           
  SCHNV    DC XL2'8'                           
           DC CL8'0'                           
- LPMV     DC XL2'4'                           
-          DC CL4'0' 
- PNOMV    DC XL2'4'                           
-          DC CL4'0'
- LPUMV    DC XL2'4'                           
-          DC CL4'0'
- PIMV     DC XL2'4'                           
-          DC CL4'0'
- POMV     DC XL2'4'                           
-          DC CL4'0'
- PAMV     DC XL2'4'                           
-          DC CL4'0'	  
+ LPMV     DC XL2'2'                           
+          DC CL2'0' 
+ PNOMV    DC XL2'2'                           
+          DC CL2'0'
+ LPUMV    DC XL2'2'                           
+          DC CL2'0'
+ PIMV     DC XL2'2'                           
+          DC CL2'0'
+ POMV     DC XL2'2'                           
+          DC CL2'0'
+ PAMV     DC XL2'2'                           
+          DC CL2'0'	  
 		  
           END
  * RUNNING WITH DEVICE #0A81                                
